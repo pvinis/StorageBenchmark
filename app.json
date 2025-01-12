@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "storagebenchmark",
+    "name": "StorageBenchmark",
     "slug": "storagebenchmark",
     "scheme": "storagebenchmark",
     "version": "1.0.0",
@@ -13,6 +13,9 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "ios": {
+      "bundleIdentifier": "com.pvinis.storagebenchmark"
     }
   }
 }

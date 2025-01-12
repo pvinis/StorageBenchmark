@@ -1,12 +1,18 @@
 import { Button, Text, View } from "react-native"
 import { getFromAsyncStorage } from "../storages/AsyncStorage"
 import { useCallback } from "react"
+import { getFromMMKV } from "../storages/MMKV"
+import { getFromMMKVEncrypted } from "../storages/MMKVEncrypted"
 
 export default function Index() {
 	const runBenchmarks = useCallback(async () => {
 		console.log("Running Benchmark in 3... 2... 1...")
 		await waitForGC()
 		await benchmark("AsyncStorage", getFromAsyncStorage)
+		await waitForGC()
+		await benchmark("MMKV", getFromMMKV)
+		await waitForGC()
+		await benchmark("MMKV Encrypted", getFromMMKVEncrypted)
 	}, [])
 
 	return (
