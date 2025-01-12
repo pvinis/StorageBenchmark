@@ -8,11 +8,11 @@ export default function Index() {
 	const runBenchmarks = useCallback(async () => {
 		console.log("Running Benchmark in 3... 2... 1...")
 		await waitForGC()
-		await benchmark("AsyncStorage", getFromAsyncStorage)
+		await benchmark("AsyncStorage      :", getFromAsyncStorage)
 		await waitForGC()
-		await benchmark("MMKV", getFromMMKV)
+		await benchmark("MMKV              :", getFromMMKV)
 		await waitForGC()
-		await benchmark("MMKV Encrypted", getFromMMKVEncrypted)
+		await benchmark("MMKV Encrypted    :", getFromMMKVEncrypted)
 	}, [])
 
 	return (

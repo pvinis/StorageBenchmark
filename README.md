@@ -1,8 +1,8 @@
-# Storage Benchmarks
+# Expo Storage Benchmark
 
-This is a benchmark app to compare popular storage solutions for React Native.
+This is a benchmark app to compare popular storage solutions for Expo (React Native).
 
-It's running React Native 0.68, with Hermes enabled.
+It's running Expo 52, React Native 0.76, with New Architecture enabled.
 
 The Benchmark consists of calling a _get_ operation (retrieve one value from the database) a thousand times.
 
@@ -26,7 +26,7 @@ Output in the console:
   <img src="./img/comparison.png" align="center" />
 </div>
 
-> Tested on an iPhone 11 Pro, Hermes, Debug
+> Tested on an iPhone 16 Pro Simulator
 
 ## Run it
 
@@ -35,15 +35,11 @@ Output in the console:
 3. Run `yarn pods`
 4. Run `yarn ios --device "YOURPHONENAME"`
 
-You can also omit the `--device "YOURPHONENAME"` flag, but running on a Simulator always gives different results than on an actual device.
-
-### JS Engine
-
-The benchmark project currently uses Hermes. To benchmark using JSC instead, set `enable_hermes` to `false` in the [`Podfile`](./app/ios/Podfile).
+<!-- You can also omit the `--device "YOURPHONENAME"` flag, but running on a Simulator always gives different results than on an actual device. -->
 
 ### Hardware
 
-The above results were tested on an iPhone 11 Pro. Results may differ on different iPhones or Android Phones.
+The above results were tested on an iPhone 16 Pro Simulator. Results may differ on different iPhones or Android Phones. Feel free to test on your own device, and report back your results in a GH issue.
 
 ### Debug
 
