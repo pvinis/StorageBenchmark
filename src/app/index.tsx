@@ -3,6 +3,9 @@ import { getFromAsyncStorage } from "../storages/AsyncStorage"
 import { useCallback } from "react"
 import { getFromMMKV } from "../storages/MMKV"
 import { getFromMMKVEncrypted } from "../storages/MMKVEncrypted"
+import { getFromExpoSqlite } from "../storages/ExpoSqlite"
+import { getFromExpoSecureStorage } from "../storages/ExpoSecureStorage"
+import { getFromReactNativeKeychain } from "../storages/ReactNativeKeychain"
 
 export default function Index() {
 	const runBenchmarks = useCallback(async () => {
@@ -13,6 +16,12 @@ export default function Index() {
 		await benchmark("MMKV              :", getFromMMKV)
 		await waitForGC()
 		await benchmark("MMKV Encrypted    :", getFromMMKVEncrypted)
+		await waitForGC()
+		await benchmark("Expo SQLite       :", getFromExpoSqlite)
+		await waitForGC()
+		await benchmark("Expo Secure Storage:", getFromExpoSecureStorage)
+		await waitForGC()
+		await benchmark("React Native Keychain:", getFromReactNativeKeychain)
 	}, [])
 
 	return (
