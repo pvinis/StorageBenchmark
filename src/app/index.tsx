@@ -1,28 +1,48 @@
 import { Button, Text, View } from "react-native"
 import { getFromAsyncStorage } from "../storages/AsyncStorage"
-import { useCallback } from "react"
+import { useCallback, useState } from "react"
 import { getFromMMKV } from "../storages/MMKV"
-import { getFromMMKVEncrypted } from "../storages/MMKVEncrypted"
 import { getFromExpoSqlite } from "../storages/ExpoSqlite"
 import { getFromExpoSecureStorage } from "../storages/ExpoSecureStorage"
 import { getFromReactNativeKeychain } from "../storages/ReactNativeKeychain"
+import { getFromRealm } from "../storages/Realm"
 
 export default function Index() {
 	const runBenchmarks = useCallback(async () => {
 		console.log("Running Benchmark in 3... 2... 1...")
+		let r = -1
+
 		await waitForGC()
-		await benchmark("AsyncStorage      :", getFromAsyncStorage)
+		r = await benchmark("AsyncStorage         :", getFromAsyncStorage)
+		setResultsAsyncStorage(r)
+
 		await waitForGC()
-		await benchmark("MMKV              :", getFromMMKV)
+		r = await benchmark("MMKV                 :", getFromMMKV)
+		setResultsMMKV(r)
+
 		await waitForGC()
-		await benchmark("MMKV Encrypted    :", getFromMMKVEncrypted)
+		r = await benchmark("Expo SQLite          :", getFromExpoSqlite)
+		setResultsExpoSqlite(r)
+
 		await waitForGC()
-		await benchmark("Expo SQLite       :", getFromExpoSqlite)
+		r = await benchmark("RealmDB              :", getFromRealm)
+		setResultsRealm(r)
+
 		await waitForGC()
-		await benchmark("Expo Secure Storage:", getFromExpoSecureStorage)
+		r = await benchmark("Expo Secure Storage  :", getFromExpoSecureStorage)
+		setResultsExpoSecureStorage(r)
+
 		await waitForGC()
-		await benchmark("React Native Keychain:", getFromReactNativeKeychain)
+		r = await benchmark("React Native Keychain:", getFromReactNativeKeychain)
+		setResultsReactNativeKeychain(r)
 	}, [])
+
+	const [resultsAsyncStorage, setResultsAsyncStorage] = useState(-1)
+	const [resultsMMKV, setResultsMMKV] = useState(-1)
+	const [resultsRealm, setResultsRealm] = useState(-1)
+	const [resultsExpoSqlite, setResultsExpoSqlite] = useState(-1)
+	const [resultsExpoSecureStorage, setResultsExpoSecureStorage] = useState(-1)
+	const [resultsReactNativeKeychain, setResultsReactNativeKeychain] = useState(-1)
 
 	return (
 		<View
@@ -34,6 +54,13 @@ export default function Index() {
 		>
 			<Text>Ready?</Text>
 			<Button title="Run Benchmarks" onPress={runBenchmarks} />
+			<Text>Results:</Text>
+			<Text>AsyncStorage: {resultsAsyncStorage.toFixed(4)}ms</Text>
+			<Text>MMKV: {resultsMMKV.toFixed(4)}ms</Text>
+			<Text>Expo SQLite: {resultsExpoSqlite.toFixed(4)}ms</Text>
+			<Text>Realm: {resultsRealm.toFixed(4)}ms</Text>
+			<Text>Expo Secure Storage: {resultsExpoSecureStorage.toFixed(4)}ms</Text>
+			<Text>React Native Keychain: {resultsReactNativeKeychain.toFixed(4)}ms</Text>
 		</View>
 	)
 }
@@ -45,10 +72,7 @@ async function waitForGC(): Promise<void> {
 
 const iterations = 1000
 
-async function benchmark(
-	label: string,
-	fn: () => unknown | Promise<unknown>
-): Promise<number> {
+async function benchmark(label: string, fn: () => unknown | Promise<unknown>): Promise<number> {
 	try {
 		console.log(`Starting Benchmark "${label}"...`)
 		const start = performance.now()

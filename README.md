@@ -6,44 +6,40 @@ It's running Expo 52, React Native 0.76, with New Architecture enabled.
 
 The Benchmark consists of calling a _get_ operation (retrieve one value from the database) a thousand times.
 
-Here are the results, ranked from fastest to slowest:
+Here are the results (average of 5 runs), ranked from fastest to slowest:
 
-1. [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv): **12ms** 👑
-2. [WatermelonDB](https://github.com/Nozbe/WatermelonDB): **53ms**
-3. [RealmDB](https://github.com/realm/realm-js): **81ms**
-4. [react-native-quick-sqlite](https://github.com/ospfranco/react-native-quick-sqlite): **82ms**
-5. [AsyncStorage](https://github.com/react-native-async-storage/async-storage): **242ms**
+1. [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv): **2ms** 👑
+2. [realm-js](https://github.com/realm/realm-js): **20ms**
+3. [async-storage](https://github.com/react-native-async-storage/async-storage): **50ms**
+4. [expo-sqlite](https://github.com/expo/expo/tree/master/packages/expo-sqlite): **197ms**
+5. [react-native-keychain](https://github.com/oblador/react-native-keychain): **263ms**
+6. [expo-secure-store](https://github.com/expo/expo/tree/master/packages/expo-secure-store): **290ms**
 
-MMKV is **20x** faster than AsyncStorage (slowest), and **4x** faster than WatermelonDB (second fastest)!
-
-<div align="center">
-  <img src="./img/graph.png" align="center" />
-</div>
-
-Output in the console:
+I would like to add [react-native-nitro-sqlite](https://github.com/mrousavy/react-native-nitro-sqlite) to the benchmark. If someone wants to help me set up nitro modules with expo, ping me, or make a PR, I'd be very grateful!
 
 <div align="center">
-  <img src="./img/comparison.png" align="center" />
+  <img src="./images/chart-device-release.png" align="center" />
 </div>
 
-> Tested on an iPhone 16 Pro Simulator
+<div align="center">
+  <img src="./images/chart-device-debug.png" align="center" />
+</div>
+
+<div align="center">
+  <img src="./images/chart-simulator-debug.png" align="center" />
+</div>
+
 
 ## Run it
 
-1. Clone the repo and navigate to the `app/` directory
-2. Run `yarn`
-3. Run `yarn pods`
-4. Run `yarn ios --device "YOURPHONENAME"`
-
-<!-- You can also omit the `--device "YOURPHONENAME"` flag, but running on a Simulator always gives different results than on an actual device. -->
+1. Clone the repo and navigate to it.
+2. Run `bun install`.
+3. Run `bun prebuild` to generate local native folders, or you can use EAS to build the app.
+4. Run `bun dev` and start the app from Xcode or Android Studio.
 
 ### Hardware
 
-The above results were tested on an iPhone 16 Pro Simulator. Results may differ on different iPhones or Android Phones. Feel free to test on your own device, and report back your results in a GH issue.
-
-### Debug
-
-The above results were tested in a debug build. Release mode builds come with many optimizations and are therefore faster than debug.
+The above results were tested on a device iPhone 15 Pro (both debug and release mode) and a simulator iPhone 16 Pro (debug mode). Results may differ on different iPhones or Android Phones. Feel free to test on your own device, and report back your results in a GH issue.
 
 ### Operations
 

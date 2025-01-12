@@ -17,6 +17,9 @@
     },
     "ios": {
       "bundleIdentifier": "com.pvinis.storagebenchmark"
+    },
+    "android": {
+      "package": "com.pvinis.storagebenchmark"
     }
   }
 }
