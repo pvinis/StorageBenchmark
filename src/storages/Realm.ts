@@ -3,26 +3,26 @@ import Realm from "realm"
 const TestSchema = {
 	name: "Test",
 	properties: {
-		_id: "int",
-		value: "string",
+		dict: "string{}",
 	},
-	primaryKey: "_id",
+}
+
+type Test = {
+	dict: Realm.Dictionary<string>
 }
 
 const realm = new Realm({
 	schema: [TestSchema],
+	deleteRealmIfMigrationNeeded: true,
 })
 
-realm.write(() => {
+const object = realm.write(() => {
 	realm.deleteAll()
-	realm.create("Test", {
-		_id: 1,
-		value: "hello",
-	})
+	return realm.create<Test>("Test", { dict: { k: "hello" } })
 })
+
+const dict = object?.dict
 
 export function getFromRealm() {
-	const object = realm.objectForPrimaryKey("Test", 1)
-	if (!object) return undefined
-	return object.value
+	return dict.k
 }

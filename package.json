@@ -8,7 +8,8 @@
     "ios": "expo run:ios",
     "doctor": "bun x expo-doctor@latest",
     "doctor:fix": "expo install --check",
-    "prebuild": "bun x expo prebuild"
+    "prebuild": "bun x expo prebuild",
+    "gen:charts": "bun x -p @mermaid-js/mermaid-cli mmdc -i charts.md -e png; mv charts.md-1.png images/chart-device-release.png; mv charts.md-2.png images/chart-device-debug.png; mv charts.md-3.png images/chart-simulator-debug.png"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "1.23.1",
