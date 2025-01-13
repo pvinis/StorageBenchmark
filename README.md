@@ -4,7 +4,7 @@ This is a benchmark app to compare popular storage solutions for Expo (React Nat
 
 It's running Expo 52, React Native 0.76, with New Architecture enabled.
 
-The benchmark consists of calling a _set_ operation a thousand times, followed by a _get_ operation a thousand times. The keys are preshuffled, and are in different order for the set and get operations, but the same for each library.
+The benchmark consists of calling a **_set_ operation a thousand times**, followed by a **_get_ operation a thousand times**. The keys are preshuffled, and are in different order for the set and get operations, but the same for each library.
 
 Here are the results (average of 5 runs), ranked from fastest to slowest:
 
