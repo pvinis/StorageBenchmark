@@ -3,9 +3,9 @@
 %%{init: {'theme': 'forest'}}%%
 xychart-beta horizontal
     title "Expo Storage Benchmark (Device iPhone 15 Pro, Release)"
-    x-axis ["AsyncStorage", "MMKV", "MMKV (encrypted)", "Expo SQLite", "Realm", "Expo SecureStore", "react-native-keychain"]   
+    x-axis ["AsyncStorage", "MMKV", "MMKV (encrypted)", "Expo SQLite", "Realm", "Expo SecureStore", "react-native-keychain", "Op SQLite"]
     y-axis "Time (in ms)"
-    bar [898, 15, 16, 793, 2418, 1284, 1014]
+    bar [898, 15, 16, 793, 2418, 1284, 1014, 626]
 ```
 
 
@@ -14,9 +14,9 @@ xychart-beta horizontal
 %%{init: {'theme': 'forest'}}%%
 xychart-beta horizontal
     title "Expo Storage Benchmark (Device iPhone 15 Pro, Debug)"
-    x-axis ["AsyncStorage", "MMKV", "MMKV (encrypted)", "Expo SQLite", "Realm", "Expo SecureStore", "react-native-keychain"]
+    x-axis ["AsyncStorage", "MMKV", "MMKV (encrypted)", "Expo SQLite", "Realm", "Expo SecureStore", "react-native-keychain", "Op SQLite"]
     y-axis "Time (in ms)"
-    bar [946, 20, 22, 917, 2277, 1452, 1066]
+    bar [946, 20, 22, 917, 2277, 1452, 1066, 630]
 ```
 
 
@@ -25,7 +25,7 @@ xychart-beta horizontal
 %%{init: {'theme': 'forest'}}%%
 xychart-beta horizontal
     title "Expo Storage Benchmark (Simulator iPhone 16 Pro, Debug)"
-    x-axis ["AsyncStorage", "MMKV", "MMKV (encrypted)", "Expo SQLite", "Realm", "Expo SecureStore", "react-native-keychain"]
+    x-axis ["AsyncStorage", "MMKV", "MMKV (encrypted)", "Expo SQLite", "Realm", "Expo SecureStore", "react-native-keychain", "Op SQLite"]
     y-axis "Time (in ms)"
-    bar [360, 12, 12, 654, 1101, 1153, 918]
+    bar [360, 12, 12, 654, 1101, 1153, 918, 372]
 ```

@@ -12,6 +12,7 @@
     "gen:charts": "bun x -p @mermaid-js/mermaid-cli mmdc -i charts.md -e png; mv charts.md-1.png images/chart-device-release.png; mv charts.md-2.png images/chart-device-debug.png; mv charts.md-3.png images/chart-simulator-debug.png"
   },
   "dependencies": {
+    "@op-engineering/op-sqlite": "^11.2.13",
     "@react-native-async-storage/async-storage": "1.23.1",
     "expo": "~52.0.25",
     "expo-dev-client": "~5.0.9",

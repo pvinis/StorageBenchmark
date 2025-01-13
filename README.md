@@ -9,11 +9,12 @@ The benchmark consists of calling a _set_ operation a thousand times, followed b
 Here are the results (average of 5 runs), ranked from fastest to slowest:
 
 1. [MMKV](https://github.com/mrousavy/react-native-mmkv): **15ms** 👑
-2. [Expo-SQLite](https://github.com/expo/expo/tree/master/packages/expo-sqlite): **793ms**
-3. [AsyncStorage](https://github.com/react-native-async-storage/async-storage): **898ms**
-4. [react-native-keychain](https://github.com/oblador/react-native-keychain): **1014ms**
-5. [Expo SecureStore](https://github.com/expo/expo/tree/master/packages/expo-secure-store): **1284ms**
-6. [Realm](https://github.com/realm/realm-js): **2418ms**
+2. [Op SQLite](https://github.com/op-engineering/op-sqlite): **626ms**
+3. [Expo-SQLite](https://github.com/expo/expo/tree/master/packages/expo-sqlite): **793ms**
+4. [AsyncStorage](https://github.com/react-native-async-storage/async-storage): **898ms**
+5. [react-native-keychain](https://github.com/oblador/react-native-keychain): **1014ms**
+6. [Expo SecureStore](https://github.com/expo/expo/tree/master/packages/expo-secure-store): **1284ms**
+7. [Realm](https://github.com/realm/realm-js): **2418ms**
 
 I would like to add [react-native-nitro-sqlite](https://github.com/mrousavy/react-native-nitro-sqlite) to the benchmark. If someone wants to help me set up nitro modules with expo, ping me, or make a PR, I'd be very grateful!
 

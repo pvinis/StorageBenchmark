@@ -6,6 +6,7 @@ import { mmkvEncrypted } from "../storages/MMKVEncrypted"
 import { expoSqlite } from "../storages/ExpoSqlite"
 import { expoSecureStorage } from "../storages/ExpoSecureStorage"
 import { reactNativeKeychain } from "../storages/ReactNativeKeychain"
+import { opSqlite } from "../storages/OpSqlite"
 import { realm } from "../storages/Realm"
 import { shuffle } from "lodash"
 import { StorageFns } from "../types"
@@ -42,6 +43,10 @@ export default function Index() {
 		await waitForGC()
 		r = await benchmark("React Native Keychain:", reactNativeKeychain)
 		setResultsReactNativeKeychain(r)
+
+		await waitForGC()
+		r = await benchmark("Op SQLite            :", opSqlite)
+		setResultsOpSqlite(r)
 	}, [])
 
 	const [resultsAsyncStorage, setResultsAsyncStorage] = useState(-1)
@@ -51,6 +56,7 @@ export default function Index() {
 	const [resultsExpoSqlite, setResultsExpoSqlite] = useState(-1)
 	const [resultsExpoSecureStorage, setResultsExpoSecureStorage] = useState(-1)
 	const [resultsReactNativeKeychain, setResultsReactNativeKeychain] = useState(-1)
+	const [resultsOpSqlite, setResultsOpSqlite] = useState(-1)
 
 	return (
 		<View
@@ -70,6 +76,7 @@ export default function Index() {
 			<Text>Realm: {resultsRealm.toFixed(4)}ms</Text>
 			<Text>Expo Secure Storage: {resultsExpoSecureStorage.toFixed(4)}ms</Text>
 			<Text>React Native Keychain: {resultsReactNativeKeychain.toFixed(4)}ms</Text>
+			<Text>Op SQLite: {resultsOpSqlite.toFixed(4)}ms</Text>
 		</View>
 	)
 }
