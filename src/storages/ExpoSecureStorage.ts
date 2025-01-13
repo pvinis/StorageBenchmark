@@ -1,10 +1,22 @@
 import { getItemAsync, setItemAsync, deleteItemAsync } from "expo-secure-store"
+import { StorageFns } from "../types"
 
-const key = "k"
+async function expoSecureStorageClear(keys: string[]): Promise<void> {
+	for (const key of keys) {
+		await deleteItemAsync(key)
+	}
+}
 
-deleteItemAsync(key)
-setItemAsync(key, "hello")
+async function expoSecureStorageSet(key: string, value: string): Promise<void> {
+	await setItemAsync(key, value)
+}
 
-export async function getFromExpoSecureStorage(): Promise<string | null> {
-	return getItemAsync(key)
+async function expoSecureStorageGet(key: string): Promise<string | null> {
+	return await getItemAsync(key)
+}
+
+export const expoSecureStorage: StorageFns = {
+	clear: expoSecureStorageClear,
+	set: expoSecureStorageSet,
+	get: expoSecureStorageGet,
 }

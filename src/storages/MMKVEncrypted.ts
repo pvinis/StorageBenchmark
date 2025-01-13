@@ -1,15 +1,25 @@
 import { MMKV } from "react-native-mmkv"
+import { StorageFns } from "../types"
 
 const storage = new MMKV({
-	id: "encrypted-mmkv-storage",
+	id: "encrypted",
 	encryptionKey: "hunter2",
 })
 
-storage.clearAll()
+function mmkvEncryptedClear(keys: string[]): void {
+	storage.clearAll()
+}
 
-const key = "k"
-storage.set(key, "hello")
+function mmkvEncryptedSet(key: string, value: string): void {
+	storage.set(key, value)
+}
 
-export function getFromMMKVEncrypted(): string | undefined {
+function mmkvEncryptedGet(key: string): string | undefined {
 	return storage.getString(key)
+}
+
+export const mmkvEncrypted: StorageFns = {
+	clear: mmkvEncryptedClear,
+	set: mmkvEncryptedSet,
+	get: mmkvEncryptedGet,
 }

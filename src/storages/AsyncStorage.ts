@@ -1,10 +1,20 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import { StorageFns } from "../types"
 
-const key = "k"
+async function asyncStorageClear(keys: string[]): Promise<void> {
+	await AsyncStorage.clear()
+}
 
-AsyncStorage.clear()
-AsyncStorage.setItem(key, "hello")
+async function asyncStorageSet(key: string, value: string): Promise<void> {
+	await AsyncStorage.setItem(key, value)
+}
 
-export async function getFromAsyncStorage(): Promise<string | null> {
-	return AsyncStorage.getItem(key)
+async function asyncStorageGet(key: string): Promise<string | null> {
+	return await AsyncStorage.getItem(key)
+}
+
+export const asyncStorage: StorageFns = {
+	clear: asyncStorageClear,
+	set: asyncStorageSet,
+	get: asyncStorageGet,
 }

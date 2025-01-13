@@ -1,10 +1,20 @@
 import Storage from "expo-sqlite/kv-store"
+import { StorageFns } from "../types"
 
-const key = "k"
+function expoSqliteClear(keys: string[]): void {
+	Storage.clear()
+}
 
-Storage.clear()
-Storage.setItem(key, "hello")
+async function expoSqliteSet(key: string, value: string): Promise<void> {
+	await Storage.setItem(key, value)
+}
 
-export async function getFromExpoSqlite(): Promise<string | null> {
-	return Storage.getItem(key)
+async function expoSqliteGet(key: string): Promise<string | null> {
+	return await Storage.getItem(key)
+}
+
+export const expoSqlite: StorageFns = {
+	clear: expoSqliteClear,
+	set: expoSqliteSet,
+	get: expoSqliteGet,
 }

@@ -1,12 +1,24 @@
 import { MMKV } from "react-native-mmkv"
+import { StorageFns } from "../types"
 
-const storage = new MMKV()
+const storage = new MMKV({
+	id: "regular",
+})
 
-storage.clearAll()
+function mmkvClear(keys: string[]): void {
+	storage.clearAll()
+}
 
-const key = "k"
-storage.set(key, "hello")
+function mmkvSet(key: string, value: string): void {
+	storage.set(key, value)
+}
 
-export function getFromMMKV(): string | undefined {
+function mmkvGet(key: string): string | undefined {
 	return storage.getString(key)
+}
+
+export const mmkv: StorageFns = {
+	clear: mmkvClear,
+	set: mmkvSet,
+	get: mmkvGet,
 }

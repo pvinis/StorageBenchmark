@@ -1,28 +1,37 @@
 import Realm from "realm"
+import { StorageFns } from "../types"
 
 const TestSchema = {
 	name: "Test",
 	properties: {
-		dict: "string{}",
+		_id: "string",
+		value: "string",
 	},
+	primaryKey: "_id",
 }
 
-type Test = {
-	dict: Realm.Dictionary<string>
+const realmdb = new Realm({ schema: [TestSchema], deleteRealmIfMigrationNeeded: true })
+
+function realmClear(keys: string[]): void {
+	realmdb.write(() => {
+		realmdb.deleteAll()
+	})
 }
 
-const realm = new Realm({
-	schema: [TestSchema],
-	deleteRealmIfMigrationNeeded: true,
-})
+function realmSet(key: string, value: string) {
+	realmdb.write(() => {
+		realmdb.create("Test", { _id: key, value })
+	})
+}
 
-const object = realm.write(() => {
-	realm.deleteAll()
-	return realm.create<Test>("Test", { dict: { k: "hello" } })
-})
+function realmGet(key: string) {
+	const o = realmdb.objectForPrimaryKey("Test", key)
+	if (o) return "ok"
+	return undefined
+}
 
-const dict = object?.dict
-
-export function getFromRealm() {
-	return dict.k
+export const realm: StorageFns = {
+	clear: realmClear,
+	set: realmSet,
+	get: realmGet,
 }
