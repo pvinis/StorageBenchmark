@@ -4,30 +4,41 @@ import { StorageFns } from "../types"
 const TestSchema = {
 	name: "Test",
 	properties: {
-		_id: "string",
-		value: "string",
-	},
-	primaryKey: "_id",
+		dict: 'string{}',
+	}
 }
 
-const realmdb = new Realm({ schema: [TestSchema], deleteRealmIfMigrationNeeded: true })
+type Test = {
+	dict: Realm.Dictionary<string>
+}
+
+const realmdb = new Realm({
+	schema: [TestSchema],
+	deleteRealmIfMigrationNeeded: true,
+});
+
+// Create a singleton object with a dictionary property used as a key-value store
+const singleton = realmdb.write(() => realmdb.create<Test>("Test", {}))
+const dict = singleton.dict
 
 function realmClear(keys: string[]): void {
-	realmdb.write(() => {
-		realmdb.deleteAll()
-	})
+	realmdb.beginTransaction();
+	// Defer a commit to the next event loop tick
+	setTimeout(() => {
+		realmdb.commitTransaction();
+	}, 0);
+
+	for (const key of keys) {
+		dict.remove(key)
+	}
 }
 
 function realmSet(key: string, value: string) {
-	realmdb.write(() => {
-		realmdb.create("Test", { _id: key, value })
-	})
+	dict[key] = value
 }
 
 function realmGet(key: string) {
-	const o = realmdb.objectForPrimaryKey("Test", key)
-	if (o) return "ok"
-	return undefined
+	return dict[key]
 }
 
 export const realm: StorageFns = {
