@@ -9,7 +9,7 @@ The Benchmark consists of calling a _get_ operation (retrieve one value from the
 Here are the results (average of 5 runs), ranked from fastest to slowest:
 
 1. [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv): **2ms** 👑
-2. [realm-js](https://github.com/realm/realm-js): **20ms**
+2. [realm-js](https://github.com/realm/realm-js): **4ms**
 3. [async-storage](https://github.com/react-native-async-storage/async-storage): **50ms**
 4. [expo-sqlite](https://github.com/expo/expo/tree/master/packages/expo-sqlite): **197ms**
 5. [react-native-keychain](https://github.com/oblador/react-native-keychain): **263ms**
